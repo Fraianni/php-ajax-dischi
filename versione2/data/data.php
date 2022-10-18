@@ -51,3 +51,19 @@ $dischi = [
     ]
 
 ];
+
+if (isset($_GET['detail'])) {
+    echo 'ciao';
+    $detail = $_GET['detail'];
+    $temp = [];
+    foreach ($dischi as $disco) {
+        if ($disco['genre'] == $detail) {
+            $temp[] = $disco;
+        }
+    }
+    $dischi = $temp;
+}
+
+header('Content-Type: application/json');
+
+echo json_encode($dischi);
