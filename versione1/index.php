@@ -1,12 +1,3 @@
-<?php
-include __DIR__ .  '/data/data.php';
-?>
-
-
-
-
-
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -19,6 +10,28 @@ include __DIR__ .  '/data/data.php';
 </head>
 
 <body>
+
+    <?php
+    include __DIR__ .  '/data/dischi.php';
+    if (isset($_GET['filter'])) {
+        $filter = strtolower($_GET['filter']);
+        $data = [];
+        foreach ($dischi as $disco) {
+            if (strlen($filter) === 0 || strtolower($disco['genre']) == $filter) {
+                $data[] = $disco;
+            }
+        }
+        $dischi = $data;
+    }
+    ?>
+
+    <header>
+        <form action="./index.php" method="get">
+            <input type="text" name="filter">
+            <input type="submit" value="cerca">
+        </form>
+    </header>
+
     <div class="cards">
         <?php
         foreach ($dischi as $disco) {
